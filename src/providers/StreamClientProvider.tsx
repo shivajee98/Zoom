@@ -21,7 +21,7 @@ import {
   }
 
   const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
-    const { user, isLoaded } = useUser();
+      const { user, isLoaded } = useUser();
     const [videoClient, setVideoClient] = useState<StreamVideoClient>();
 
     useEffect(() => {
