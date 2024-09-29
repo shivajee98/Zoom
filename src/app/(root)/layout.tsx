@@ -1,16 +1,16 @@
-import React from 'react'
-
+import StreamVideoProvider from "@/providers/StreamClientProvider";
+import React from "react";
 
 interface RootProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
-const RootLayout = ({children}: RootProps) => {
+const RootLayout = ({ children }: RootProps) => {
   return (
     <main>
-        {children}
+      <StreamVideoProvider>{children}</StreamVideoProvider>
     </main>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;
