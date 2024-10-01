@@ -8,7 +8,9 @@ interface RootProps {
 const RootLayout = ({ children }: RootProps) => {
   return (
     <main>
-      <StreamVideoProvider>{children}</StreamVideoProvider>
+      <StreamVideoProvider>
+        {children}
+        </StreamVideoProvider>
     </main>
   );
 };
