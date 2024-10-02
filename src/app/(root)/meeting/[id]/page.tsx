@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import MeetingRoom from "@/components/MeetingRoom";
 import MeetingSetup from "@/components/MeetingSetup";
@@ -13,11 +13,15 @@ const MeetingPage = ({ params }: { params: { id: string } }) => {
   const { id } = params; // Destructure id from params
   const { call, isCallLoading } = useGetCallById(id);
 
+  if (isCallLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <main className="h-screen w-full text-white">
       <StreamCall call={call}>
         <StreamTheme>
-          {!isSetupCompleted ? <MeetingSetup /> : <MeetingRoom />}
+          {!isSetupCompleted ? <MeetingSetup setIsSetupCompleted={setIsSetupCompleted} /> : <MeetingRoom />}
         </StreamTheme>
       </StreamCall>
     </main>
