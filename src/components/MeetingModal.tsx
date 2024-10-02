@@ -49,7 +49,7 @@ const MeetingModal = ({
             className={
               "bg-blue-1 focus-visible:ring-0 focus-visible:ring-offset-0"
             }
-            onClick={() => handleClick}
+            onClick={handleClick}
           >
             {buttonIcon && (
               <Image
