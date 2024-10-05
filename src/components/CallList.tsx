@@ -50,7 +50,7 @@ const CallList = ({ type }: CallListProps) => {
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessages();
 
-  if (isLoading) return <Loader />
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -58,26 +58,37 @@ const CallList = ({ type }: CallListProps) => {
         {calls && calls.length > 0 ? (
           calls.map((meeting: Call | CallRecording) => (
             <MeetingCard
-            key={(meeting as Call).id}
-              icon = {
-                type === "ended" ? '/icons/previous.svg' :
-                type === 'upcoming' ? '/icons/upcoming.svg' :
-                '/icons/recordings.svg'
+              key={(meeting as Call).id}
+              icon={
+                type === "ended"
+                  ? "/icons/previous.svg"
+                  : type === "upcoming"
+                  ? "/icons/upcoming.svg"
+                  : "/icons/recordings.svg"
               }
-
-              title= { (meeting as Call).state.custom.description.substring(0, 20) || 'No description' }
-
-              date= { (meeting as Call).state.startsAt?.toLocaleString() || meeting.start_time.toLocaleString() }
-
-              isPreviousMeeting = { type === 'ended'}
-
-              buttonIcon1 = { type === 'recordings' ? '/icons/paly.svg' : undefined }
-
-              buttonText={ type === 'recordings' ? 'Play' : 'Start' }
-
-              link = { type === 'recordings' ? meeting.url : `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meeting.id}` }
-
-              handleClick = { type === 'recordings' ? () => router.push(`${meeting.url}`) : () => router.push(`/meeting/${meeting.id}`) }
+              title={
+                (meeting as Call).state.custom.description.substring(0, 20) ||
+                "No description"
+              }
+              date={
+                (meeting as Call).state.startsAt?.toLocaleString() ||
+                meeting.start_time.toLocaleString()
+              }
+              isPreviousMeeting={type === "ended"}
+              buttonIcon1={
+                type === "recordings" ? "/icons/paly.svg" : undefined
+              }
+              buttonText={type === "recordings" ? "Play" : "Start"}
+              link={
+                type === "recordings"
+                  ? meeting.url
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meeting.id}`
+              }
+              handleClick={
+                type === "recordings"
+                  ? () => router.push(`${meeting.url}`)
+                  : () => router.push(`/meeting/${meeting.id}`)
+              }
             />
           ))
         ) : (
