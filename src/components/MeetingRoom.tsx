@@ -1,25 +1,23 @@
 import { cn } from "@/lib/utils";
 import {
-  CallControls,
-  CallingState,
-  CallParticipantsList,
-  CallStatsButton,
-  PaginatedGridLayout,
-  SpeakerLayout,
-  useCallStateHooks,
+    CallControls,
+    CallingState,
+    CallParticipantsList,
+    CallStatsButton,
+    PaginatedGridLayout,
+    SpeakerLayout,
+    useCallStateHooks,
 } from "@stream-io/video-react-sdk";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { LayoutList, User } from "lucide-react";
-import { Button } from "./ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import EndCallButton from "./EndCallButton";
 import Loader from "./Loader";

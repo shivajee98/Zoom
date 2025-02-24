@@ -11,10 +11,9 @@ import { useToast } from '@/hooks/use-toast';
 
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   const router = useRouter();
-  const toast = useToast()
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
-  const [recordings, setRecordings] = useState<CallRecording[]>([]);
+//   const [recordings, setRecordings] = useState<CallRecording[]>([]);
 
   const getCalls = () => {
     switch (type) {
@@ -52,7 +51,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         .filter((call) => call.recordings.length > 0)
         .flatMap((call) => call.recordings);
 
-      setRecordings(recordings);
+    //   setRecordings(recordings);
     };
 
     if (type === 'recordings') {
