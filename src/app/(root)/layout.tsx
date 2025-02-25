@@ -7,7 +7,7 @@ interface RootProps {
 }
 
 export const metadata: Metadata = {
-    title: "ZOOM",
+    title: "OPEXN",
   description: "Video calling app",
   icons: {
     icon: '/icons/logo.svg'
