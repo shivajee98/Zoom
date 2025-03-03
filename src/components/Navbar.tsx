@@ -15,8 +15,8 @@ const Navbar = () => {
           alt="Zoom logo"
           className="max-sm:size-10"
         />
-        <p className="text-[26px] font-extrabold text-white max-sm:hidden">
-          Opexn Meet
+        <p className="text-[26px] font-bold text-white max-sm:hidden">
+          Openx Meet
         </p>
       </Link>
 
