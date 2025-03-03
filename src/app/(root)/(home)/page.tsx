@@ -4,14 +4,8 @@ import MeetingTypeList from "@/components/MeetingTypeList";
 const Home = () => {
   const now = new Date();
 
-//   const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-
-const hours = now.getHours();
-const minutes = now.getMinutes();
-const ampm = hours >= 12 ? 'PM' : 'AM';
-const formattedHours = hours % 12 || 12;
-const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-const time = `${formattedHours}:${formattedMinutes} ${ampm}`;
+const options = { timeZone: 'Asia/Kolkata', hour: '2-digit' as const, minute: '2-digit' as const, hour12: true };
+const time = new Intl.DateTimeFormat('en-US', options).format(now);
 
 
   const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(now);
