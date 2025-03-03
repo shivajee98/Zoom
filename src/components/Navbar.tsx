@@ -16,12 +16,12 @@ const Navbar = () => {
           className="max-sm:size-10"
         />
         <p className="text-[26px] font-extrabold text-white max-sm:hidden">
-          Zoom
+          Opexn Meet
         </p>
       </Link>
 
       <div className="flex flex-between gap-5">
-      
+
 
         <SignedIn>
           <UserButton />

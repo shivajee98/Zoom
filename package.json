@@ -16,7 +16,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
     "@stream-io/node-sdk": "^0.4.3",
-    "@stream-io/video-react-sdk": "^1.4.3",
+    "@stream-io/video-react-sdk": "^1.12.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.446.0",
@@ -24,6 +24,8 @@
     "react": "^18",
     "react-datepicker": "^7.4.0",
     "react-dom": "^18",
+    "stream-chat": "^8.56.1",
+    "stream-chat-react": "^12.13.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
   },
