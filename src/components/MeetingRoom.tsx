@@ -27,6 +27,9 @@ import Image from "next/image";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
+const cloudinaryUrl = 'https://res.cloudinary.com/dng61q3lg/image/upload/v1741110942/exhibitor-images/uivs1nphtjpz67vgbsoz.jpg'
+
+
 const MeetingRoom = () => {
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get("personal");
@@ -45,33 +48,33 @@ const MeetingRoom = () => {
   const CustomParticipantViewUI = () => {
     const { participant } = useParticipantViewContext();
     return (
-    <div
-      className="sm:border-[5px] border-[8px]"
-      style={{
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        borderRadius: "10px",
-      }}
-    >
-      <div className="bg-white w-full h-9 sm:h-6 sm:px-[2px] sm:pt-[2px] p-1 sm:p-0 flex justify-between text-black">
-        <div>
-        <Image
-          src="/icons/logo.svg"
-          alt="logo"
-          width={30}
-          height={30}
-          className="rounded-full sm:size-5"
-        />
-        </div>
-        <div>
-        <h1 className="uppercase  sm:text-xs">{participant.name}</h1>
-        </div>
-        <div>
-        <h1 className="text-lg font-semibold sm:text-sm">Narayani Award</h1>
+      <div
+        className="sm:border-[5px] border-[8px]"
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          borderRadius: "10px",
+        }}
+      >
+        <div className="bg-white w-full h-9 sm:h-6 sm:px-[2px] sm:pt-[2px] p-1 sm:p-0 flex justify-between text-black">
+          <div>
+            <Image
+              src="/icons/logo.svg"
+              alt="logo"
+              width={30}
+              height={30}
+              className="rounded-full sm:size-5"
+            />
+          </div>
+          <div>
+            <h1 className="uppercase  sm:text-xs">{participant.name}</h1>
+          </div>
+          <div>
+            <h1 className="text-lg font-semibold sm:text-sm">Narayani Award</h1>
+          </div>
         </div>
       </div>
-    </div>
     );
   };
 
@@ -100,7 +103,9 @@ const MeetingRoom = () => {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[url('/images/Banner.jpg')] bg-cover bg-center text-white">
+    <section className="relative h-screen w-full overflow-hidden bg-cover bg-center text-white"
+      style={{ backgroundImage: `url(${cloudinaryUrl})` }}
+    >
       <div className="relative top-0 flex size-full items-center justify-center">
         <div className="flex size-full max-w-[1000px] ">
           <CallLayout />
@@ -132,7 +137,7 @@ const MeetingRoom = () => {
           </div>
           <DropdownMenuContent
             className="border-dark-1 bg-bark-1
-           text-white"
+          text-white"
           >
             {["Grid", "Speaker-Left", "Speaker-Right"].map((item, index) => (
               <div key={index}>
