@@ -8,6 +8,7 @@ import {
   ParticipantView,
   SpeakerLayout,
   useCallStateHooks,
+  useParticipantViewContext,
 } from "@stream-io/video-react-sdk";
 import { useState } from "react";
 
@@ -22,6 +23,7 @@ import { LayoutList, User } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import EndCallButton from "./EndCallButton";
 import Loader from "./Loader";
+import Image from "next/image";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
@@ -39,6 +41,36 @@ const MeetingRoom = () => {
   const router = useRouter()
 
   if (callingState !== CallingState.JOINED) return <Loader />;
+
+
+  const CustomParticipantViewUI = () => {
+    const { participant } = useParticipantViewContext();
+    return (
+      <div
+        className=""
+        style={{ position: "absolute", width: "100%", height: "100%" }}
+      >
+        <div className="bg-white w-full h-9 px-3 py-1 flex justify-between text-black">
+          <div>
+            <Image
+              src="/icons/logo.svg"
+              alt="logo"
+              width={30}
+              height={30}
+              className="rounded-full"
+            />
+          </div>
+          <div>
+            <h1 className="uppercase">{participant.name}</h1>
+          </div>
+          <div>
+            <h1 className="text-lg font-semibold">Narayani Award</h1>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
 
 
 

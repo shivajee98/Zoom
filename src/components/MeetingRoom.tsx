@@ -1,130 +1,113 @@
-"use client";
-
-import React, { useState } from "react";
+import { cn } from "@/lib/utils";
 import {
-  ParticipantView,
   CallControls,
   CallingState,
-  useCallStateHooks,
-  useParticipantViewContext,
   CallParticipantsList,
   CallStatsButton,
   PaginatedGridLayout,
+  ParticipantView,
   SpeakerLayout,
+  useCallStateHooks,
+  useParticipantViewContext,
 } from "@stream-io/video-react-sdk";
+import { useState } from "react";
+
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger
-  } from "@/components/ui/dropdown-menu";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { LayoutList, User } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import EndCallButton from "./EndCallButton";
 import Loader from "./Loader";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { LayoutList, User } from "lucide-react";
-import EndCallButton from "./EndCallButton";
-
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
+const MeetingRoom = () => {
+  const searchParams = useSearchParams();
+  const isPersonalRoom = !!searchParams.get("personal");
 
-// const CustomParticipantLabel = () => {
-//   const { participant } = useParticipantViewContext();
-//   return (
-//     <div
-//       style={{
-//         position: "absolute",
-//         top: "2px", // Adjust vertical position as needed
-//         left: "50%",
-//         transform: "translateX(-50%)",
-//         backgroundColor: "rgba(0, 0, 0, 0.6)",
-//         color: "#fff",
-//         padding: "5px 10px",
-//         borderRadius: "0 0 4px 4px",
-//         zIndex: 10,
-//       }}
-//     >
-//       {participant.name}
-//     </div>
-//   );
-// };
+  const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
+  const [showParticipents, setShowParticipents] = useState(false);
 
-// Custom UI component that wraps the custom label
-const CustomParticipantViewUI = () => {
-  const { participant } = useParticipantViewContext();
-  return (
+  const { useCallCallingState } = useCallStateHooks();
+
+  const callingState = useCallCallingState();
+
+  const router = useRouter();
+
+  if (callingState !== CallingState.JOINED) return <Loader />;
+
+  const CustomParticipantViewUI = () => {
+    const { participant } = useParticipantViewContext();
+    return (
     <div
-      className=""
-      style={{ position: "absolute", width: "100%", height: "100%" }}
+      className="sm:border-[5px] border-[8px]"
+      style={{
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        borderRadius: "10px",
+      }}
     >
-      <div className="bg-white w-full h-9 px-3 py-1 flex justify-between text-black">
+      <div className="bg-white w-full h-9 sm:h-6 sm:px-[2px] sm:pt-[2px] p-1 sm:p-0 flex justify-between text-black">
         <div>
-          <Image
-            src={participant.image}
-            alt="logo"
-            width={30}
-            height={30}
-            className="rounded-full"
-          />
+        <Image
+          src="/icons/logo.svg"
+          alt="logo"
+          width={30}
+          height={30}
+          className="rounded-full sm:size-5"
+        />
         </div>
         <div>
-          <h1 className="uppercase">{participant.name}</h1>
+        <h1 className="uppercase  sm:text-xs">{participant.name}</h1>
         </div>
         <div>
-          <h1 className="text-lg font-semibold">Narayani Award</h1>
+        <h1 className="text-lg font-semibold sm:text-sm">Narayani Award</h1>
         </div>
       </div>
     </div>
-  );
-};
-
-
-const MeetingRoom = () => {
-  const [showParticipents, setShowParticipents] = useState(false);
-  const { useCallCallingState, useParticipants } = useCallStateHooks();
-  const callingState = useCallCallingState();
-  const participants = useParticipants();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const isPersonalRoom = !!searchParams.get("personal");
-  const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
-
-  if (callingState !== CallingState.JOINED) return <Loader />;
+    );
+  };
 
   const CallLayout = () => {
     switch (layout) {
       case "grid":
-        return <PaginatedGridLayout />;
+        return (
+          <PaginatedGridLayout ParticipantViewUI={CustomParticipantViewUI} />
+        );
         break;
 
       case "speaker-right":
-        return <SpeakerLayout participantsBarPosition="left" />;
+        return (
+          <SpeakerLayout
+            participantsBarPosition="left"
+            ParticipantViewUIBar={CustomParticipantViewUI}
+          />
+        );
 
       default:
-        return <SpeakerLayout participantsBarPosition="right" />;
+        return (
+          <PaginatedGridLayout ParticipantViewUI={CustomParticipantViewUI} />
+        );
         break;
     }
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden pt-4 text-white">
+    <section className="relative h-screen w-full overflow-hidden bg-[url('/images/Banner.jpg')] bg-cover bg-center text-white">
       <div className="relative top-0 flex size-full items-center justify-center">
         <div className="flex size-full max-w-[1000px] ">
-          {participants.map((participant) => (
-            <ParticipantView
-              key={participant.sessionId}
-              participant={participant}
-              ParticipantViewUI={CustomParticipantViewUI}
-              className=" h-[85vh] border-[8px] border-white rounded-lg"
-            />
-          ))}
+          <CallLayout />
         </div>
-
         <div
           className={cn(
-            "h-[calc(100vh-86px)] hidden ml-2 mb-[70px]  w-[300px] border-4 border-red-400",
+            "h-[calc(100vh-86px)] hidden ml-2  w-[300px] border-4 border-red-400",
             {
               "show-block": showParticipents,
             }
@@ -135,7 +118,11 @@ const MeetingRoom = () => {
       </div>
 
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap">
-        <CallControls onLeave={() => router.push("/")} />
+        <CallControls
+          onLeave={() => {
+            router.push("/");
+          }}
+        />
 
         <DropdownMenu>
           <div className="flex items-center">
@@ -153,8 +140,7 @@ const MeetingRoom = () => {
                   className="cursor-pointer"
                   onClick={() => {
                     setLayout(item.toLowerCase() as CallLayoutType);
-                  }
-                }
+                  }}
                 >
                   {item}
                 </DropdownMenuItem>
