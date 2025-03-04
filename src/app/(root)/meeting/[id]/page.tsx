@@ -3,7 +3,7 @@
 import MeetingRoom from "@/components/MeetingRoom";
 import MeetingSetup from "@/components/MeetingSetup";
 import { useGetCallById } from "@/hooks/useGetCallById";
-import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
+import { PaginatedGridLayout, StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { Chat, useCreateChatClient } from "stream-chat-react";
 import { useState } from "react";
 

@@ -1,36 +1,39 @@
-'use client'
+"use client";
 
 import {
   StreamCall,
   StreamVideo,
   StreamVideoClient,
   User as StreamUser,
-} from '@stream-io/video-react-sdk';
+  VideoPreview,
+} from "@stream-io/video-react-sdk";
 
-import React, { useEffect, useState } from 'react';
-import { useUser } from '@clerk/nextjs';
-import { tokenProvider } from '@/actions/stream.actions';
-import Loader from '@/components/Loader';
+import React, { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import { tokenProvider } from "@/actions/stream.actions";
+import Loader from "@/components/Loader";
+import { Chat } from "stream-chat-react";
+import { StreamChat } from "stream-chat";
+
+
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
-
+const chatApiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
 const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
-
   const { user, isLoaded } = useUser();
 
   const [videoClient, setVideoClient] = useState<StreamVideoClient>();
+  const [chatClient, setChatClient] = useState<StreamChat>();
 
   useEffect(() => {
-
     if (!isLoaded || !user) {
       return;
     }
 
     if (!apiKey) {
-      throw new Error('Stream API key missing');
+      throw new Error("Stream API key missing");
     }
-
 
     const client = new StreamVideoClient({
       apiKey,
@@ -47,16 +50,38 @@ const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
     setVideoClient(client);
     console.log("Checkpoint 9: videoClient state updated");
 
+    // if (!chatApiKey) {
+    //   throw new Error("Stream Chat API key missing");
+    // }
+
+    if (!chatApiKey) {
+      throw new Error("Stream Chat API key missing");
+    }
+
+    const chatClient = StreamChat.getInstance(chatApiKey);
+    chatClient.connectUser(
+      {
+        id: user.id,
+        name: user.username || user.id,
+        image: user.imageUrl,
+      },
+      tokenProvider // Assuming the same token provider works for chat
+    );
+
+    setChatClient(chatClient);
   }, [user, isLoaded]);
 
-  if (!videoClient) {
-    // console.log("Checkpoint 10: videoClient not available, rendering Loader");
+  if (!videoClient || !chatClient) {
     return <Loader />;
   }
 
-//   console.log("Checkpoint 11: videoClient available, rendering StreamVideo");
-
-  return <StreamVideo client={videoClient}>{children}</StreamVideo>;
+  return (
+    <StreamVideo client={videoClient}>
+        {children}
+      {/* <Chat client={chatClient}>{children}</Chat> */}
+      {/* <VideoPreview /> */}
+    </StreamVideo>
+  );
 };
 
 export default StreamVideoProvider;

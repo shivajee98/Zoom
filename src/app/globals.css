@@ -8,6 +8,7 @@
   box-sizing: border-box;
 }
 
+
 /* ======== stream css overrides ======== */
 .str-video__call-stats {
   max-width: 500px;
@@ -20,6 +21,41 @@
 
 .str-video__participant-details {
   color: white;
+text-transform: uppercase;
+  /* position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0; */
+
+}
+
+.str-video__participant-details{
+    /* border-radius: none; */
+    bottom: 496px;
+    left: 397px;
+}
+
+/* .str-video__participant-details__name{
+
+} */
+
+/* .str-video__video-placeholder{
+    position: relative;
+} */
+
+/* .str-video__participant-details{
+    right: 0;
+    top: 0;
+    position: absolute;
+    border: 2px solid white;
+    border-radius: 10px;
+    z-index: 10;
+    left: none;
+    bottom: none;
+} */
+
+.str-video__participant-view--speaking{
+    outline: none;
 }
 
 .str-video__menu-container {
@@ -53,6 +89,8 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
+
+
 
 /* ==== clerk class override ===== */
 .cl-userButtonPopoverActionButtonIcon {
