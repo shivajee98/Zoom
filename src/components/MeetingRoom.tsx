@@ -27,8 +27,8 @@ import Image from "next/image";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
-const cloudinaryUrl = 'https://res.cloudinary.com/dng61q3lg/image/upload/v1741110942/exhibitor-images/uivs1nphtjpz67vgbsoz.jpg'
-
+const cloudinaryUrl =
+  "https://res.cloudinary.com/dng61q3lg/image/upload/v1741110942/exhibitor-images/uivs1nphtjpz67vgbsoz.jpg";
 
 const MeetingRoom = () => {
   const searchParams = useSearchParams();
@@ -47,31 +47,37 @@ const MeetingRoom = () => {
 
   const CustomParticipantViewUI = () => {
     const { participant } = useParticipantViewContext();
+
     return (
-      <div
-        className="sm:border-[5px] border-[8px]"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          borderRadius: "10px",
-        }}
-      >
-        <div className="bg-white w-full h-9 sm:h-6 sm:px-[2px] sm:pt-[2px] p-1 sm:p-0 flex justify-between text-black">
+      <div className="border-[5px] lg:border-[10px] md:border-[10px] absolute w-full h-full rounded-lg">
+        <div className="bg-white w-full lg:h-9 md:h-9 h-6  p-2 flex justify-between items-center text-black lg:p-2 md:p-2 rounded-t-[3px] lg:rounded-t-none md:rounded-t-none">
           <div>
             <Image
-              src="/icons/logo.svg"
+              src="/images/opexn_logo.png"
               alt="logo"
-              width={30}
-              height={30}
-              className="rounded-full sm:size-5"
+              width={50}
+              height={50}
+              className="rounded-full lg:size-full md:size-full size-5 sm:w-5 sm:h-5"
             />
           </div>
+
           <div>
-            <h1 className="uppercase  sm:text-xs">{participant.name}</h1>
+            <h1 className="uppercase lg:text-md md:text-md text-xs">
+              {participant.name}
+            </h1>
           </div>
-          <div>
-            <h1 className="text-lg font-semibold sm:text-sm">Narayani Award</h1>
+
+          <div className="flex gap-1 items-center">
+            <Image
+              src="/images/incubation.png"
+              alt="award"
+              width={30}
+              height={30}
+              className="rounded-full lg:size-8 md:size-8 sm:w-5 sm:h-5 mt-[4px]"
+            />
+            <h1 className="lg:text-md md:text-md font-semibold text-xs">
+              Narayani Award
+            </h1>
           </div>
         </div>
       </div>
@@ -80,10 +86,10 @@ const MeetingRoom = () => {
 
   const CallLayout = () => {
     switch (layout) {
-      case "grid":
-        return (
-          <PaginatedGridLayout ParticipantViewUI={CustomParticipantViewUI} />
-        );
+        case "grid":
+          return (
+            <PaginatedGridLayout ParticipantViewUI={CustomParticipantViewUI} />
+          );
 
       case "speaker-left":
         return (
@@ -94,23 +100,19 @@ const MeetingRoom = () => {
           />
         );
 
-      case "speaker-right":
-        return (
-          <SpeakerLayout
-            participantsBarPosition="right"
-            ParticipantViewUIBar={CustomParticipantViewUI}
-            ParticipantViewUISpotlight={CustomParticipantViewUI}
+      //   case "speaker-right":
+      //     return (
+      //       <SpeakerLayout
+      //         participantsBarPosition="right"
+      //         ParticipantViewUIBar={CustomParticipantViewUI}
+      //         ParticipantViewUISpotlight={CustomParticipantViewUI}
 
-          />
-        );
+      //       />
+      //     );
 
       default:
         return (
-            <SpeakerLayout
-            participantsBarPosition="left"
-            ParticipantViewUIBar={CustomParticipantViewUI}
-            ParticipantViewUISpotlight={CustomParticipantViewUI}
-          />
+          <PaginatedGridLayout ParticipantViewUI={CustomParticipantViewUI} />
         );
         break;
     }
@@ -119,7 +121,7 @@ const MeetingRoom = () => {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[url('https://res.cloudinary.com/dng61q3lg/image/upload/v1741110942/exhibitor-images/uivs1nphtjpz67vgbsoz.jpg')] bg-cover bg-center text-white">
       <div className="relative top-0 flex size-full items-center justify-center">
-        <div className="flex size-full max-w-[1000px] ">
+        <div className="flex size-full max-w-[1000px] p-2 ">
           <CallLayout />
         </div>
         <div
@@ -151,7 +153,7 @@ const MeetingRoom = () => {
             className="border-dark-1 bg-bark-1
            text-white"
           >
-            {["Grid", "Speaker-Left", "Speaker-Right"].map((item, index) => (
+            {["Grid", "Speaker-Left"].map((item, index) => (
               <div key={index}>
                 <DropdownMenuItem
                   className="cursor-pointer"
