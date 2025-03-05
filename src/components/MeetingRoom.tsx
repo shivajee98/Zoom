@@ -27,6 +27,9 @@ import Image from "next/image";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
+const cloudinaryUrl = 'https://res.cloudinary.com/dng61q3lg/image/upload/v1741110942/exhibitor-images/uivs1nphtjpz67vgbsoz.jpg'
+
+
 const MeetingRoom = () => {
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get("personal");
@@ -114,7 +117,7 @@ const MeetingRoom = () => {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[url('https://res.cloudinary.com/dng61q3lg/image/upload/v1741110942/exhibitor-images/uivs1nphtjpz67vgbsoz.jpg')] bg-cover bg-center text-white">
+    <section className="relative h-screen w-full overflow-hidden bg-[url('/images/Banner.jpg')] bg-cover bg-center text-white">
       <div className="relative top-0 flex size-full items-center justify-center">
         <div className="flex size-full max-w-[1000px] ">
           <CallLayout />
@@ -145,7 +148,7 @@ const MeetingRoom = () => {
             </DropdownMenuTrigger>
           </div>
           <DropdownMenuContent
-            className="border-dark-1 bg-black
+            className="border-dark-1 bg-bark-1
            text-white"
           >
             {["Grid", "Speaker-Left", "Speaker-Right"].map((item, index) => (
