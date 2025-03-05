@@ -97,9 +97,9 @@ text-transform: uppercase;
   color: white;
 }
 
-.cl-logoBox {
+/* .cl-logoBox {
   height: 40px;
-}
+} */
 
 .cl-dividerLine {
   background: #252a41;
@@ -116,6 +116,28 @@ text-transform: uppercase;
 
 .cl-userButtonPopoverActionButton {
   color: white;
+}
+
+.cl-internal-1dauvpw{
+    opacity: 0;
+    height: 0px;
+    padding: 0px;
+}
+
+.cl-internal-yelct8{
+    height: 0px;
+}
+
+.cl-internal-qo3qk7{
+    gap: 10px;
+}
+
+.cl-internal-laksia{
+    font-size: 15px
+}
+
+.cl-internal-hrrh4y{
+    font-size: 15px
 }
 
 /* =============================== */

@@ -45,30 +45,9 @@ const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
       tokenProvider,
     });
 
-    console.log("Checkpoint 8: StreamVideoClient instance created", client);
-
     setVideoClient(client);
-    console.log("Checkpoint 9: videoClient state updated");
 
-    // if (!chatApiKey) {
-    //   throw new Error("Stream Chat API key missing");
-    // }
 
-    if (!chatApiKey) {
-      throw new Error("Stream Chat API key missing");
-    }
-
-    const chatClient = StreamChat.getInstance(chatApiKey);
-    chatClient.connectUser(
-      {
-        id: user.id,
-        name: user.username || user.id,
-        image: user.imageUrl,
-      },
-      tokenProvider // Assuming the same token provider works for chat
-    );
-
-    setChatClient(chatClient);
   }, [user, isLoaded]);
 
   if (!videoClient || !chatClient) {
@@ -78,8 +57,6 @@ const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <StreamVideo client={videoClient}>
         {children}
-      {/* <Chat client={chatClient}>{children}</Chat> */}
-      {/* <VideoPreview /> */}
     </StreamVideo>
   );
 };
